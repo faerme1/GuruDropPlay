@@ -1,71 +1,150 @@
-const Telegram = window.Telegram.WebApp;
-Telegram.ready();
-Telegram.expand();
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Guru Drop Play</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Верхняя шапка -->
+        <div class="top-header">
+            <div class="header-left">
+                <span class="close-btn">✕</span> <span class="app-title">GURU DROP PLAY</span>
+            </div>
+            <div class="header-right">
+                <span class="more-btn">⋯</span>
+            </div>
+        </div>
 
-let balance = 100;
-const betCost = 15;
-// Порядок цифр на твоей картинке (по часовой стрелке от верхнего левого края)
-// Если по факту выпадает 5 вместо 1 - поменяй первую цифру в массиве на 5
-const sectors = [1, 5, 2, 10, 1, 50, 1, 0]; 
+        <!-- REFERRAL -->
+        <div class="row">
+            <div class="pill-btn">🔗 REFERRAL</div>
+            <div class="star-pill">0 ⭐</div>
+        </div>
 
-let isSpinning = false;
-let currentRotation = 0; // Запоминаем, сколько уже накручено
+        <!-- БАННЕР ГУРУ -->
+        <div class="guru-banner">
+            <div class="guru-avatar">🧙‍♂️</div>
+            <div class="guru-info">
+                <h2>GURU DROP PLAY</h2>
+                <p>Мини-казино в твоём Telegram</p>
+                <div class="guru-tags">
+                    <span class="tag">🎁 Подарки</span>
+                    <span class="tag">+888 номера</span>
+                    <span class="tag">👑 Статус</span>
+                </div>
+            </div>
+            <div class="guru-arrow">›</div>
+        </div>
 
-const balanceDisplay = document.getElementById('balance');
-const spinBtn = document.getElementById('spinBtn');
-const wheel = document.getElementById('rouletteWheel');
+        <!-- ОСНОВНОЕ МЕНЮ (4 карточки) -->
+        <div class="menu-grid">
+            <!-- Инвентарь -->
+            <div class="card-item" onclick="openInventory()">
+                <div class="card-bg" style="background: linear-gradient(135deg, #2d1b69, #4a2a8c);"></div>
+                <div class="card-icon">🎒</div>
+                <div class="card-text">
+                    <h3>ИНВЕНТАРЬ</h3>
+                    <p>Твои предметы и бонусы</p>
+                </div>
+                <div class="card-arrow">›</div>
+            </div>
 
-function updateUI() {
-    balanceDisplay.innerText = balance;
-    spinBtn.innerText = balance >= betCost ? `Крутить за ${betCost} ⭐` : 'Не хватает ⭐';
-    spinBtn.disabled = balance < betCost;
-}
+            <!-- Слоты -->
+            <div class="card-item" onclick="openSlots()">
+                <div class="card-bg" style="background: linear-gradient(135deg, #1a2a4a, #2a4a7a);"></div>
+                <div class="card-icon">🎰</div>
+                <div class="card-text">
+                    <h3>СЛОТЫ</h3>
+                    <p>Испытай удачу в слотах</p>
+                </div>
+                <div class="card-arrow">›</div>
+            </div>
 
-function spin() {
-    if (isSpinning || balance < betCost) return;
+            <!-- Рулетка -->
+            <div class="card-item" onclick="openRoulette()">
+                <div class="card-bg" style="background: linear-gradient(135deg, #0f3d3a, #1a5a55);"></div>
+                <div class="card-icon">🎡</div>
+                <div class="card-text">
+                    <h3>РУЛЕТКА</h3>
+                    <p>Крути колесо фортуны</p>
+                </div>
+                <div class="card-arrow">›</div>
+            </div>
 
-    isSpinning = true;
-    spinBtn.disabled = true;
+            <!-- Апгрейд -->
+            <div class="card-item" onclick="alert('Скоро!')">
+                <div class="card-bg" style="background: linear-gradient(135deg, #5c3a1a, #7a4a2a);"></div>
+                <div class="card-icon">🗝️</div>
+                <div class="card-text">
+                    <h3>АПГРЕЙД</h3>
+                    <p>Улучшай предметы</p>
+                </div>
+                <div class="card-arrow">›</div>
+            </div>
+        </div>
 
-    // 1. Списываем деньги
-    balance -= betCost;
-    updateUI();
+        <!-- ПРОГРЕСС ПОДАРКА -->
+        <div class="gift-progress">
+            <div class="progress-label">ДО СЛЕДУЮЩЕГО ПОДАРКА</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 60%;"></div>
+                <span class="progress-percent">60%</span>
+            </div>
+            <div class="gift-icon">🎁</div>
+        </div>
 
-    // 2. Выбираем ВЫИГРЫШ (а не просто индекс)
-    const randomIndex = Math.floor(Math.random() * sectors.length);
-    const winAmount = sectors[randomIndex];
+        <!-- ПРАВИЛА -->
+        <div class="rules-box">
+            <div class="rules-header">📜 ПРАВИЛА</div>
+            <div class="rules-text">Играйте ответственно!<br>Удача любит подготовленных</div>
+            <div class="rules-deco">🃏</div>
+        </div>
+    </div>
 
-    // 3. Вычисляем угол, чтобы попасть ровно в центр этого сектора
-    const sectorAngle = 360 / sectors.length; // 45°
-    
-    // Вычисляем центр сектора, начиная от 12 часов (верха) по часовой стрелке
-    const targetSectorAngle = randomIndex * sectorAngle + (sectorAngle / 2);
-    
-    // Чтобы стрелка указала на этот центр, колесо должно повернуться на 360 - targetSectorAngle
-    const stopAngle = 360 - targetSectorAngle;
+    <!-- НИЖНЯЯ ПАНЕЛЬ -->
+    <div class="bottom-nav">
+        <div class="nav-item"><div>🏠</div><span>Главная</span></div>
+        <div class="nav-item"><div>🎯</div><span>Задания</span></div>
+        <div class="nav-item active"><div>🎲</div><span>Игра</span></div>
+        <div class="nav-item"><div>🛒</div><span>Магазин</span></div>
+        <div class="nav-item"><div>👤</div><span>Профиль</span></div>
+    </div>
 
-    // 4. Добавляем 8 красивых оборотов к текущему положению
-    currentRotation += 360 * 8 + stopAngle;
+    <!-- ЭКРАНЫ -->
+    <div class="screen" id="rouletteScreen">
+        <div class="screen-header">
+            <span class="back-btn" onclick="goHome()">← Назад</span>
+            <span>Рулетка</span>
+        </div>
+        <div class="screen-content">
+            <div class="placeholder">Сюда вставим Рулетку</div>
+        </div>
+    </div>
 
-    // 5. Запускаем вращение
-    wheel.style.transition = 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
-    wheel.style.transform = `rotate(${currentRotation}deg)`;
-    if (navigator.vibrate) navigator.vibrate(50);
+    <div class="screen" id="slotsScreen">
+        <div class="screen-header">
+            <span class="back-btn" onclick="goHome()">← Назад</span>
+            <span>Слоты</span>
+        </div>
+        <div class="screen-content">
+            <div class="placeholder">Сюда вставим Слоты</div>
+        </div>
+    </div>
 
-    // 6. Ожидаем окончания вращения и выдаём результат
-    setTimeout(() => {
-        if (winAmount > 0) {
-            balance += winAmount;
-            Telegram.showAlert(`✅ Выигрыш: +${winAmount} ⭐`);
-        } else {
-            Telegram.showAlert('0 ⭐ Пустой сектор. Повезет в следующий раз!');
-        }
+    <div class="screen" id="inventoryScreen">
+        <div class="screen-header">
+            <span class="back-btn" onclick="goHome()">← Назад</span>
+            <span>Инвентарь</span>
+        </div>
+        <div class="screen-content">
+            <div class="placeholder">Скоро тут будет инвентарь</div>
+        </div>
+    </div>
 
-        updateUI();
-        spinBtn.disabled = false;
-        isSpinning = false;
-    }, 5000);
-}
-
-spinBtn.addEventListener('click', spin);
-updateUI();
+    <script src="script.js"></script>
+</body>
+</html>
