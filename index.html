@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GuruDropPlay</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <div class="title-logo">GURU DROP</div>
+            <div class="balance-box">💰 <span id="balance">100</span> ⭐</div>
+        </div>
+
+        <div class="card roulette-card">
+            <div class="card-title">🎡 КРУТИ КОЛЕСО</div>
+            
+            <div class="wheel-wrapper">
+                <!-- Стрелка (рисуется CSS-кодом, идеально ровно на 12 часов) -->
+                <div class="arrow-3d"></div>
+                <div class="roulette" id="rouletteWheel">
+                    <!-- Картинка колеса с идеальными цифрами -->
+                    <img src="wheel_rotate.png" class="wheel-img" alt="Колесо">
+                </div>
+            </div>
+
+            <button id="spinBtn" class="button">Крутить за 15 ⭐</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
