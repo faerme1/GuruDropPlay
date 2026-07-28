@@ -4,11 +4,12 @@ Telegram.expand();
 
 let balance = 100;
 const betCost = 15;
-
-// Твоя идеальная картинка, цифры по часовой стрелке от 12 часов
+// Порядок цифр на твоей картинке (по часовой стрелке от верхнего левого края)
+// Если по факту выпадает 5 вместо 1 - поменяй первую цифру в массиве на 5
 const sectors = [1, 5, 2, 10, 1, 50, 1, 0]; 
 
 let isSpinning = false;
+let currentRotation = 0; // Запоминаем, сколько уже накручено
 
 const balanceDisplay = document.getElementById('balance');
 const spinBtn = document.getElementById('spinBtn');
@@ -22,42 +23,48 @@ function updateUI() {
 
 function spin() {
     if (isSpinning || balance < betCost) return;
-    
+
     isSpinning = true;
     spinBtn.disabled = true;
-    
+
+    // 1. Списываем деньги
     balance -= betCost;
     updateUI();
 
+    // 2. Выбираем ВЫИГРЫШ (а не просто индекс)
     const randomIndex = Math.floor(Math.random() * sectors.length);
     const winAmount = sectors[randomIndex];
+
+    // 3. Вычисляем угол, чтобы попасть ровно в центр этого сектора
+    const sectorAngle = 360 / sectors.length; // 45°
     
-    // Сброс и плавное вращение
-    wheel.style.transition = 'none'; 
-    wheel.style.transform = 'rotate(0deg)';
-    void wheel.offsetHeight; 
-    wheel.style.transition = 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)'; 
+    // Вычисляем центр сектора, начиная от 12 часов (верха) по часовой стрелке
+    const targetSectorAngle = randomIndex * sectorAngle + (sectorAngle / 2);
+    
+    // Чтобы стрелка указала на этот центр, колесо должно повернуться на 360 - targetSectorAngle
+    const stopAngle = 360 - targetSectorAngle;
 
-    const baseAngle = 360 * 10; 
-    const sectorAngle = 360 / sectors.length; 
-    const targetAngle = baseAngle + (randomIndex * sectorAngle) + (sectorAngle / 2);
+    // 4. Добавляем 8 красивых оборотов к текущему положению
+    currentRotation += 360 * 8 + stopAngle;
 
-    wheel.style.transform = `rotate(${targetAngle}deg)`;
+    // 5. Запускаем вращение
+    wheel.style.transition = 'transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
     if (navigator.vibrate) navigator.vibrate(50);
 
+    // 6. Ожидаем окончания вращения и выдаём результат
     setTimeout(() => {
-        isSpinning = false;
-        
         if (winAmount > 0) {
             balance += winAmount;
             Telegram.showAlert(`✅ Выигрыш: +${winAmount} ⭐`);
         } else {
-            Telegram.showAlert(`0 ⭐ Пустой сектор. Повезет в следующий раз!`);
+            Telegram.showAlert('0 ⭐ Пустой сектор. Повезет в следующий раз!');
         }
-        
+
         updateUI();
         spinBtn.disabled = false;
-    }, 5500);
+        isSpinning = false;
+    }, 5000);
 }
 
 spinBtn.addEventListener('click', spin);
