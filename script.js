@@ -40,7 +40,7 @@ function spin() {
 
     const baseAngle = 360 * 10; 
     const sectorAngle = 360 / sectors.length; 
-    const targetAngle = baseAngle + (randomIndex * sectorAngle);
+    const targetAngle = baseAngle + (randomIndex * sectorAngle) + (sectorAngle / 2);
 
     wheel.style.transform = `rotate(${targetAngle}deg)`;
     if (navigator.vibrate) navigator.vibrate(50);
