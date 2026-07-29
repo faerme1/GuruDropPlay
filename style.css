@@ -14,21 +14,50 @@ body { background: #0a0a12; color: white; display: flex; justify-content: center
 .pill-btn { background: #1a1a2e; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #ccc; }
 .star-pill { background: #1a1a2e; padding: 6px 14px; border-radius: 20px; font-size: 14px; color: #f1c40f; font-weight: bold; border: 1px solid #333; }
 
-/* Баннер */
-.guru-banner {
-    background: linear-gradient(135deg, #1e1e30, #0f0f1a);
-    border-radius: 20px; padding: 10px 15px; 
-    display: flex; align-items: center; gap: 10px; 
-    border: 1px solid rgba(255,255,255,0.05); position: relative;
+/* Карточки меню */
+.menu-grid { display: flex; flex-direction: column; gap: 15px; }
+.card-item {
+    position: relative; border-radius: 24px; padding: 20px 20px 20px 25px; 
+    overflow: hidden; cursor: pointer;
+    display: flex; align-items: center; gap: 20px; 
+    border: 1px solid rgba(255,255,255,0.08);
+    min-height: 110px; /* Высота как на идеале */
 }
-.guru-avatar { 
+.card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+
+.card-icon { 
     z-index: 1; 
-    width: 100px; /* ДЕЛАЕМ ДЕДА БОЛЬШИМ */
-    height: 100px; 
+    width: 80px; 
+    height: 80px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    flex-shrink: 0;
+    flex-shrink: 0; 
+}
+.card-icon img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    /* Добавляем небольшую тень, чтобы картинка висела в воздухе, а не прилипала */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); 
+}
+
+.card-text { z-index: 1; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.card-text h3 { font-size: 20px; font-weight: bold; color: #fff; margin-bottom: 4px; }
+.card-text p { font-size: 14px; color: rgba(255,255,255,0.7); }
+.card-arrow { z-index: 1; font-size: 24px; color: rgba(255,255,255,0.5); }
+
+/* Баннер Гуру (отдельно, чтобы тоже было красиво) */
+.guru-banner {
+    background: linear-gradient(135deg, #1e1e30, #0f0f1a);
+    border-radius: 24px; padding: 15px 20px; 
+    display: flex; align-items: center; gap: 15px; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    position: relative;
+}
+.guru-avatar { 
+    z-index: 1; width: 80px; height: 80px; 
+    display: flex; justify-content: center; align-items: center; flex-shrink: 0;
 }
 .guru-avatar img { width: 100%; height: 100%; object-fit: contain; }
 .guru-info h2 { font-size: 20px; font-weight: bold; color: #a855f7; letter-spacing: 1px; }
@@ -36,36 +65,6 @@ body { background: #0a0a12; color: white; display: flex; justify-content: center
 .guru-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 12px; font-size: 12px; color: #aaa; }
 .guru-arrow { font-size: 20px; color: #888; position: absolute; right: 15px; }
-
-/* Карточки меню */
-.menu-grid { display: flex; flex-direction: column; gap: 12px; }
-.card-item {
-    position: relative; border-radius: 20px; padding: 10px 20px 10px 10px; 
-    overflow: hidden; cursor: pointer;
-    display: flex; align-items: center; gap: 15px; 
-    border: 1px solid rgba(255,255,255,0.05);
-    min-height: 100px; /* Делаем карточку повыше */
-}
-.card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-.card-icon { 
-    z-index: 1; 
-    width: 90px; /* ОГРОМНЫЙ РАЗМЕР ДЛЯ ИКОНКИ */
-    height: 90px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-shrink: 0; 
-    margin-left: -10px; /* Сдвигаем чуть влево, чтобы было ещё больше */
-}
-.card-icon img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: contain; /* Картинка не сплющится */
-}
-.card-text { z-index: 1; flex-grow: 1; padding-left: 5px; }
-.card-text h3 { font-size: 18px; font-weight: bold; color: #fff; }
-.card-text p { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
-.card-arrow { z-index: 1; font-size: 22px; color: rgba(255,255,255,0.5); }
 
 /* Прогресс */
 .gift-progress { background: #1a1a2e; border-radius: 20px; padding: 15px; position: relative; margin-top: 5px; }
