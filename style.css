@@ -1,94 +1,76 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
 body { background: #0a0a12; color: white; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
 
-.app { max-width: 420px; width: 100%; padding: 15px; display: flex; flex-direction: column; gap: 12px; padding-bottom: 80px; }
+.app { max-width: 420px; width: 100%; padding: 15px; display: flex; flex-direction: column; gap: 10px; padding-bottom: 80px; }
 
 /* Шапка */
 .top-header { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; }
-.header-left { display: flex; align-items: center; gap: 10px; }
-.close-btn { font-size: 20px; color: #aaa; }
-.app-title { font-weight: bold; font-size: 16px; }
-.header-right .more-btn { font-size: 24px; color: #aaa; }
+.header-left { display: flex; align-items: center; gap: 8px; }
+.close-btn { font-size: 18px; color: #aaa; }
+.app-title { font-weight: bold; font-size: 15px; }
+.header-right .more-btn { font-size: 22px; color: #aaa; }
 
 .row { display: flex; justify-content: space-between; align-items: center; }
-.pill-btn { background: #1a1a2e; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #ccc; }
-.star-pill { background: #1a1a2e; padding: 6px 14px; border-radius: 20px; font-size: 14px; color: #f1c40f; font-weight: bold; border: 1px solid #333; }
+.pill-btn { background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #ccc; }
+.star-pill { background: #1a1a2e; padding: 4px 12px; border-radius: 20px; font-size: 13px; color: #f1c40f; font-weight: bold; border: 1px solid #333; }
 
-/* Карточки меню */
-.menu-grid { display: flex; flex-direction: column; gap: 15px; }
-.card-item {
-    position: relative; border-radius: 24px; padding: 20px 20px 20px 25px; 
-    overflow: hidden; cursor: pointer;
-    display: flex; align-items: center; gap: 20px; 
-    border: 1px solid rgba(255,255,255,0.08);
-    min-height: 110px; /* Высота как на идеале */
-}
-.card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-
-.card-icon { 
-    z-index: 1; 
-    width: 80px; 
-    height: 80px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-shrink: 0; 
-}
-.card-icon img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: contain; 
-    /* Добавляем небольшую тень, чтобы картинка висела в воздухе, а не прилипала */
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); 
-}
-
-.card-text { z-index: 1; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-.card-text h3 { font-size: 20px; font-weight: bold; color: #fff; margin-bottom: 4px; }
-.card-text p { font-size: 14px; color: rgba(255,255,255,0.7); }
-.card-arrow { z-index: 1; font-size: 24px; color: rgba(255,255,255,0.5); }
-
-/* Баннер Гуру (отдельно, чтобы тоже было красиво) */
+/* Баннер */
 .guru-banner {
     background: linear-gradient(135deg, #1e1e30, #0f0f1a);
-    border-radius: 24px; padding: 15px 20px; 
-    display: flex; align-items: center; gap: 15px; 
-    border: 1px solid rgba(255,255,255,0.05); 
-    position: relative;
+    border-radius: 16px; padding: 12px 15px; 
+    display: flex; align-items: center; gap: 12px; 
+    border: 1px solid rgba(255,255,255,0.05); position: relative;
 }
-.guru-avatar { 
-    z-index: 1; width: 80px; height: 80px; 
-    display: flex; justify-content: center; align-items: center; flex-shrink: 0;
-}
+.guru-avatar { width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
 .guru-avatar img { width: 100%; height: 100%; object-fit: contain; }
-.guru-info h2 { font-size: 20px; font-weight: bold; color: #a855f7; letter-spacing: 1px; }
-.guru-info p { font-size: 13px; color: #888; margin: 2px 0 8px 0; }
-.guru-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tag { background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 12px; font-size: 12px; color: #aaa; }
-.guru-arrow { font-size: 20px; color: #888; position: absolute; right: 15px; }
+.guru-info h2 { font-size: 18px; font-weight: bold; color: #a855f7; letter-spacing: 1px; }
+.guru-info p { font-size: 12px; color: #888; margin: 0 0 6px 0; }
+.guru-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.tag { background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 10px; font-size: 10px; color: #aaa; }
+.guru-arrow { font-size: 18px; color: #888; position: absolute; right: 12px; }
 
-/* Прогресс */
-.gift-progress { background: #1a1a2e; border-radius: 20px; padding: 15px; position: relative; margin-top: 5px; }
-.progress-label { font-size: 12px; font-weight: bold; color: #888; margin-bottom: 8px; }
-.progress-bar { height: 8px; background: #333; border-radius: 10px; overflow: hidden; width: 90%; }
+/* Карточки меню (САМОЕ ГЛАВНОЕ ИЗМЕНЕНИЕ) */
+.menu-grid { display: flex; flex-direction: column; gap: 10px; }
+.card-item {
+    position: relative; border-radius: 16px; padding: 10px 15px 10px 10px; 
+    overflow: hidden; cursor: pointer;
+    display: flex; align-items: center; gap: 12px; 
+    border: 1px solid rgba(255,255,255,0.05);
+    min-height: 70px; /* ВЫСОТА ТЕПЕРЬ МАЛЕНЬКАЯ, КАК В ОРИГИНАЛЕ */
+}
+.card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.card-icon { width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; z-index: 1; }
+.card-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); }
+.card-text { z-index: 1; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.card-text h3 { font-size: 16px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+.card-text p { font-size: 12px; color: rgba(255,255,255,0.6); }
+.card-arrow { z-index: 1; font-size: 18px; color: rgba(255,255,255,0.4); }
+
+/* Прогресс (вернул на место) */
+.gift-progress { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 12px 15px; position: relative; margin-top: 5px; }
+.progress-label { font-size: 11px; font-weight: bold; color: #888; margin-bottom: 6px; }
+.progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; width: 85%; }
 .progress-fill { height: 100%; background: #a855f7; border-radius: 10px; }
-.progress-percent { position: absolute; right: 50px; top: 18px; font-size: 13px; color: #ddd; }
-.gift-icon { position: absolute; right: 15px; top: 5px; font-size: 35px; }
+.progress-percent { position: absolute; right: 55px; top: 15px; font-size: 12px; color: #ddd; }
+.gift-icon { position: absolute; right: 12px; top: 3px; font-size: 30px; z-index: 1; }
+.gift-icon img { width: 40px; height: auto; }
 
-/* Правила */
-.rules-box { background: #1a1a2e; border-radius: 20px; padding: 15px; position: relative; overflow: hidden; }
-.rules-header { font-size: 13px; font-weight: bold; color: #888; }
-.rules-text { font-size: 14px; color: #ddd; margin-top: 5px; line-height: 1.4; }
-.rules-deco { position: absolute; right: 15px; bottom: 10px; font-size: 40px; }
+/* Правила (вернул на место) */
+.rules-box { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 12px 15px; position: relative; overflow: hidden; }
+.rules-header { font-size: 12px; font-weight: bold; color: #888; }
+.rules-text { font-size: 13px; color: #ddd; margin-top: 3px; line-height: 1.3; }
+.rules-deco { position: absolute; right: 10px; bottom: 5px; font-size: 30px; z-index: 1; }
+.rules-deco img { width: 45px; height: auto; }
 
 /* Нижняя панель */
 .bottom-nav {
     position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 100%; max-width: 420px; background: #12121f; border-top: 1px solid #222;
-    display: flex; justify-content: space-around; padding: 10px 0 20px 0; z-index: 50;
+    width: 100%; max-width: 420px; background: #0f0f1a; border-top: 1px solid #222;
+    display: flex; justify-content: space-around; padding: 8px 0 16px 0; z-index: 50;
 }
-.nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #555; gap: 2px; cursor: pointer; }
+.nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #555; gap: 2px; cursor: pointer; }
 .nav-item.active { color: #a855f7; }
-.nav-item div { font-size: 22px; }
+.nav-item div { font-size: 20px; }
 
 /* Экран */
 .screen {
@@ -97,7 +79,7 @@ body { background: #0a0a12; color: white; display: flex; justify-content: center
     display: none; flex-direction: column; padding: 20px; padding-bottom: 20px;
 }
 .screen.active { display: flex; }
-.screen-header { display: flex; align-items: center; gap: 20px; padding-bottom: 20px; font-weight: bold; font-size: 18px; }
-.back-btn { cursor: pointer; color: #aaa; font-size: 16px; }
+.screen-header { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; font-weight: bold; font-size: 17px; }
+.back-btn { cursor: pointer; color: #aaa; font-size: 15px; }
 .screen-content { flex-grow: 1; display: flex; justify-content: center; align-items: center; }
-.placeholder { text-align: center; color: #555; font-size: 16px; }
+.placeholder { text-align: center; color: #555; font-size: 15px; }
