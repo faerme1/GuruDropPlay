@@ -17,12 +17,14 @@ body { background: #0a0a12; color: white; display: flex; justify-content: center
 /* Баннер */
 .guru-banner {
     background: linear-gradient(135deg, #1e1e30, #0f0f1a);
-    border-radius: 20px; padding: 15px; display: flex; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.05); position: relative;
+    border-radius: 20px; padding: 10px 15px; 
+    display: flex; align-items: center; gap: 10px; 
+    border: 1px solid rgba(255,255,255,0.05); position: relative;
 }
 .guru-avatar { 
     z-index: 1; 
-    width: 80px; 
-    height: 80px; 
+    width: 100px; /* ДЕЛАЕМ ДЕДА БОЛЬШИМ */
+    height: 100px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -38,26 +40,29 @@ body { background: #0a0a12; color: white; display: flex; justify-content: center
 /* Карточки меню */
 .menu-grid { display: flex; flex-direction: column; gap: 12px; }
 .card-item {
-    position: relative; border-radius: 20px; padding: 15px 20px; overflow: hidden; cursor: pointer;
-    display: flex; align-items: center; gap: 15px; border: 1px solid rgba(255,255,255,0.05);
-    min-height: 90px; /* Высота карточки как на идеале */
+    position: relative; border-radius: 20px; padding: 10px 20px 10px 10px; 
+    overflow: hidden; cursor: pointer;
+    display: flex; align-items: center; gap: 15px; 
+    border: 1px solid rgba(255,255,255,0.05);
+    min-height: 100px; /* Делаем карточку повыше */
 }
 .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
 .card-icon { 
     z-index: 1; 
-    width: 60px; 
-    height: 60px; 
+    width: 90px; /* ОГРОМНЫЙ РАЗМЕР ДЛЯ ИКОНКИ */
+    height: 90px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     flex-shrink: 0; 
+    margin-left: -10px; /* Сдвигаем чуть влево, чтобы было ещё больше */
 }
 .card-icon img { 
     width: 100%; 
     height: 100%; 
-    object-fit: contain; /* Чтобы не сплющивалась */ 
+    object-fit: contain; /* Картинка не сплющится */
 }
-.card-text { z-index: 1; flex-grow: 1; }
+.card-text { z-index: 1; flex-grow: 1; padding-left: 5px; }
 .card-text h3 { font-size: 18px; font-weight: bold; color: #fff; }
 .card-text p { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 2px; }
 .card-arrow { z-index: 1; font-size: 22px; color: rgba(255,255,255,0.5); }
